@@ -6,13 +6,31 @@ import (
 	"net/http"
 )
 
-type HandleFunc func(w http.ResponseWriter, r *http.Request)
+type HandleFunc func(context *Context)
+
+type Context struct {
+	W http.ResponseWriter
+	R *http.Request
+}
 
 // eg: /user/login /user/register , user is a routeGroup
 type routeGroup struct {
-	name            string                // eg: user
-	handleFuncMap   map[string]HandleFunc // eg: login loginFunc
-	handleMethodMap map[string][]string   // eg: get {/login, /register}
+	name            string                           // eg: user
+	handleFuncMap   map[string]map[string]HandleFunc // eg: login loginFunc
+	handleMethodMap map[string][]string              // eg: get {/login, /register}
+}
+
+func (rg *routeGroup) registerHandleFuncMap(name, method string, f HandleFunc) {
+	_, ok := rg.handleFuncMap[name]
+	if !ok {
+		rg.handleFuncMap[name] = make(map[string]HandleFunc)
+	}
+	_, ok = rg.handleFuncMap[name][method]
+	if ok {
+		panic("Not allowed repeated route")
+	}
+	rg.handleFuncMap[name][method] = f
+	rg.handleMethodMap[method] = append(rg.handleMethodMap[method], name)
 }
 
 // Any register a method
@@ -22,18 +40,15 @@ type routeGroup struct {
 //      "{"ANY":{"/login"}}"
 //}
 func (rg *routeGroup) Any(name string, f HandleFunc) {
-	rg.handleFuncMap[name] = f
-	rg.handleMethodMap["ANY"] = append(rg.handleMethodMap["ANY"], name)
+	rg.registerHandleFuncMap(name, "ANY", f)
 }
 
 func (rg *routeGroup) Get(name string, f HandleFunc) {
-	rg.handleFuncMap[name] = f
-	rg.handleMethodMap[http.MethodGet] = append(rg.handleMethodMap[http.MethodGet], name)
+	rg.registerHandleFuncMap(name, http.MethodGet, f)
 }
 
 func (rg *routeGroup) Post(name string, f HandleFunc) {
-	rg.handleFuncMap[name] = f
-	rg.handleMethodMap[http.MethodPost] = append(rg.handleMethodMap[http.MethodPost], name)
+	rg.registerHandleFuncMap(name, http.MethodPost, f)
 }
 
 type route struct {
@@ -44,7 +59,7 @@ type route struct {
 func (r *route) Group(name string) *routeGroup {
 	rg := &routeGroup{
 		name:            name,
-		handleFuncMap:   make(map[string]HandleFunc),
+		handleFuncMap:   make(map[string]map[string]HandleFunc),
 		handleMethodMap: make(map[string][]string),
 	}
 	r.routeGroups = append(r.routeGroups, rg)
@@ -64,27 +79,23 @@ func New() *Engine {
 func (e *Engine) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	method := r.Method
 	for _, rg := range e.Route.routeGroups {
-		for name, methodHandle := range rg.handleFuncMap { // name: "/login", handle: func
+		for name, methodHandleMap := range rg.handleFuncMap { // name: "/login", handle: func
 			url := fmt.Sprintf("/%s%s", rg.name, name)
 			if url == r.RequestURI { // please don't use else, beacuse u must let it loops
-				routes, ok := rg.handleMethodMap["ANY"]
+				ctx := &Context{
+					W: w,
+					R: r,
+				}
+				handle, ok := methodHandleMap["ANY"]
 				if ok {
-					for _, routeName := range routes {
-						if routeName == name {
-							methodHandle(w, r)
-							return
-						}
-					}
+					handle(ctx)
+					return
 				}
 
-				routes, ok = rg.handleMethodMap[method]
+				handle, ok = methodHandleMap[method]
 				if ok {
-					for _, routeName := range routes {
-						if routeName == name {
-							methodHandle(w, r)
-							return
-						}
-					}
+					handle(ctx)
+					return
 				}
 				w.WriteHeader(405)
 				fmt.Fprintf(w, "%s not supported", method)
