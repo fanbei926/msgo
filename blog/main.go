@@ -2,7 +2,7 @@ package main
 
 import (
 	"fanfan926.icu/msgo/v2"
-	"fmt"
+	fmt "fmt"
 )
 
 func main() {
@@ -17,6 +17,18 @@ func main() {
 
 	userRg.Post("/login", func(ctx *msgo.Context) {
 		fmt.Fprintln(ctx.W, "post login")
+	})
+
+	userRg.Post("/first/:id", func(ctx *msgo.Context) {
+		fmt.Fprintln(ctx.W, "11 any id")
+	})
+
+	userRg.Post("/hello/*/:id", func(ctx *msgo.Context) {
+		fmt.Fprintln(ctx.W, "222 any id")
+	})
+
+	userRg.Post("/hello1/xxx", func(ctx *msgo.Context) {
+		fmt.Fprintln(ctx.W, "xxx")
 	})
 
 	e.Run()

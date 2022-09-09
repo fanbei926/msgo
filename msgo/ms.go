@@ -6,6 +6,8 @@ import (
 	"net/http"
 )
 
+const ANY = "ANY"
+
 type HandleFunc func(context *Context)
 
 type Context struct {
@@ -16,21 +18,24 @@ type Context struct {
 // eg: /user/login /user/register , user is a routeGroup
 type routeGroup struct {
 	name            string                           // eg: user
-	handleFuncMap   map[string]map[string]HandleFunc // eg: login loginFunc
+	handleFuncMap   map[string]map[string]HandleFunc // eg: login get:loginFunc
 	handleMethodMap map[string][]string              // eg: get {/login, /register}
+	routeTree       *treeNode
 }
 
-func (rg *routeGroup) registerHandleFuncMap(name, method string, f HandleFunc) {
-	_, ok := rg.handleFuncMap[name]
+func (rg *routeGroup) registerHandleFuncMap(path, method string, f HandleFunc) {
+	_, ok := rg.handleFuncMap[path]
 	if !ok {
-		rg.handleFuncMap[name] = make(map[string]HandleFunc)
+		rg.handleFuncMap[path] = make(map[string]HandleFunc)
 	}
-	_, ok = rg.handleFuncMap[name][method]
+	_, ok = rg.handleFuncMap[path][method]
 	if ok {
 		panic("Not allowed repeated route")
 	}
-	rg.handleFuncMap[name][method] = f
-	rg.handleMethodMap[method] = append(rg.handleMethodMap[method], name)
+	rg.handleFuncMap[path][method] = f
+	rg.handleMethodMap[method] = append(rg.handleMethodMap[method], path)
+
+	rg.routeTree.Put("/" + rg.name + path) // rootPath + subPath
 }
 
 // Any register a method
@@ -39,16 +44,29 @@ func (rg *routeGroup) registerHandleFuncMap(name, method string, f HandleFunc) {
 //		"{"/login": func xxx()}",
 //      "{"ANY":{"/login"}}"
 //}
-func (rg *routeGroup) Any(name string, f HandleFunc) {
-	rg.registerHandleFuncMap(name, "ANY", f)
+func (rg *routeGroup) Any(path string, f HandleFunc) {
+	rg.registerHandleFuncMap(path, ANY, f)
 }
-
-func (rg *routeGroup) Get(name string, f HandleFunc) {
-	rg.registerHandleFuncMap(name, http.MethodGet, f)
+func (rg *routeGroup) Get(path string, f HandleFunc) {
+	rg.registerHandleFuncMap(path, http.MethodGet, f)
 }
-
-func (rg *routeGroup) Post(name string, f HandleFunc) {
-	rg.registerHandleFuncMap(name, http.MethodPost, f)
+func (rg *routeGroup) Post(path string, f HandleFunc) {
+	rg.registerHandleFuncMap(path, http.MethodPost, f)
+}
+func (rg *routeGroup) Delete(path string, f HandleFunc) {
+	rg.registerHandleFuncMap(path, http.MethodPost, f)
+}
+func (rg *routeGroup) Put(path string, f HandleFunc) {
+	rg.registerHandleFuncMap(path, http.MethodPost, f)
+}
+func (rg *routeGroup) Patch(path string, f HandleFunc) {
+	rg.registerHandleFuncMap(path, http.MethodPost, f)
+}
+func (rg *routeGroup) Options(path string, f HandleFunc) {
+	rg.registerHandleFuncMap(path, http.MethodPost, f)
+}
+func (rg *routeGroup) Head(path string, f HandleFunc) {
+	rg.registerHandleFuncMap(path, http.MethodPost, f)
 }
 
 type route struct {
@@ -61,7 +79,12 @@ func (r *route) Group(name string) *routeGroup {
 		name:            name,
 		handleFuncMap:   make(map[string]map[string]HandleFunc),
 		handleMethodMap: make(map[string][]string),
+		routeTree: &treeNode{
+			name:     "/",
+			children: make([]*treeNode, 0),
+		},
 	}
+
 	r.routeGroups = append(r.routeGroups, rg)
 	return rg
 }
@@ -79,28 +102,27 @@ func New() *Engine {
 func (e *Engine) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	method := r.Method
 	for _, rg := range e.Route.routeGroups {
-		for name, methodHandleMap := range rg.handleFuncMap { // name: "/login", handle: func
-			url := fmt.Sprintf("/%s%s", rg.name, name)
-			if url == r.RequestURI { // please don't use else, beacuse u must let it loops
-				ctx := &Context{
-					W: w,
-					R: r,
-				}
-				handle, ok := methodHandleMap["ANY"]
-				if ok {
-					handle(ctx)
-					return
-				}
-
-				handle, ok = methodHandleMap[method]
-				if ok {
-					handle(ctx)
-					return
-				}
-				w.WriteHeader(405)
-				fmt.Fprintf(w, "%s not supported", method)
+		node := rg.routeTree.Get(r.RequestURI)
+		if node != nil && node.isEnd == true {
+			ctx := &Context{
+				W: w,
+				R: r,
+			}
+			uri := SubStringLast(node.rootPath, rg.name) // name must contain a slash
+			handle, ok := rg.handleFuncMap[uri]["ANY"]
+			if ok {
+				handle(ctx)
 				return
 			}
+
+			handle, ok = rg.handleFuncMap[uri][method]
+			if ok {
+				handle(ctx)
+				return
+			}
+			w.WriteHeader(405)
+			fmt.Fprintf(w, "%s not supported", method)
+			return
 		}
 	}
 
