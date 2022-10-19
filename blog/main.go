@@ -43,8 +43,17 @@ func main() {
 	//	}
 	//})
 	logger.Level = msLog.LevelDebug
+	logger.Formatter = &msLog.JsonFormatter{
+		TimeDisplay: true,
+	}
+	//logger.Outs = append(logger.Outs, msLog.FileWriter("./log/log.log"))
+	logger.SetLogPath("./log")
+	logger.LogFileSize = 1 << 10 //1k
 	userRg.Get("/info", func(ctx *msgo.Context) {
-		logger.Debug("Debug")
+		logger.WithFields(msLog.Fields{
+			"name": "fkdyy",
+			"age":  1000,
+		}).Debug("Debug")
 		logger.Info("Info")
 		logger.Error("Error")
 		fmt.Fprintln(ctx.W, "get hello")

@@ -1,9 +1,13 @@
 package log
 
 import (
+	"fanfan926.icu/msgo/v2/internal/msstrings"
 	"fmt"
 	"io"
+	"log"
 	"os"
+	"path"
+	"strings"
 	"time"
 )
 
@@ -25,6 +29,7 @@ const (
 	reset     = "\033[0m"
 )
 
+type Fields map[string]any
 type LoggerLevel int
 
 func (l LoggerLevel) Level() string {
@@ -46,15 +51,35 @@ const (
 	LevelError
 )
 
+type LoggingFormatter interface {
+	Format(param *LoggingFormatParam) string
+}
+
+type LoggingFormatParam struct {
+	Level        LoggerLevel
+	IsColor      bool
+	LoggerFields Fields
+	Msg          any
+}
+
 type LoggerFormatter struct {
-	Level   LoggerLevel
-	IsColor bool
+	Level        LoggerLevel
+	IsColor      bool
+	LoggerFields Fields
 }
 
 type Logger struct {
-	Formatter LoggerFormatter
-	Level     LoggerLevel
-	Outs      []io.Writer
+	Formatter    LoggingFormatter
+	Level        LoggerLevel
+	Outs         []*LoggerWriter
+	LoggerFields Fields
+	LogPath      string
+	LogFileSize  int64
+}
+
+type LoggerWriter struct {
+	Level LoggerLevel
+	Out   io.Writer
 }
 
 func New() *Logger {
@@ -64,7 +89,12 @@ func New() *Logger {
 func Default() *Logger {
 	logger := New()
 	logger.Level = LevelDebug
-	logger.Outs = append(logger.Outs, os.Stdout)
+	w := &LoggerWriter{
+		Level: LevelDebug,
+		Out:   os.Stdout,
+	}
+	logger.Outs = append(logger.Outs, w)
+	logger.Formatter = &TextFormatter{}
 	return logger
 }
 
@@ -80,58 +110,85 @@ func (l *Logger) Error(msg any) {
 	l.Print(LevelError, msg)
 }
 
+func (l *Logger) SetLogPath(logPath string) {
+	l.LogPath = logPath
+	l.Outs = append(l.Outs, &LoggerWriter{
+		Level: -1,
+		Out:   FileWriter(path.Join(logPath, "all.log")),
+	})
+	l.Outs = append(l.Outs, &LoggerWriter{
+		Level: LevelDebug,
+		Out:   FileWriter(path.Join(logPath, "debug.log")),
+	})
+	l.Outs = append(l.Outs, &LoggerWriter{
+		Level: LevelInfo,
+		Out:   FileWriter(path.Join(logPath, "info.log")),
+	})
+	l.Outs = append(l.Outs, &LoggerWriter{
+		Level: LevelError,
+		Out:   FileWriter(path.Join(logPath, "error.log")),
+	})
+}
+
+func (l *Logger) CheckFileSize(w *LoggerWriter) {
+	logFile := w.Out.(*os.File)
+	if logFile != nil {
+		stat, err := logFile.Stat()
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		size := stat.Size()
+		if l.LogFileSize <= 0 {
+			l.LogFileSize = 100 << 20 //20m
+		}
+		if size >= l.LogFileSize {
+			_, name := path.Split(stat.Name())
+			fileName := name[0:strings.Index(name, ".")]
+			writer := FileWriter(path.Join(l.LogPath, msstrings.JoinStrings(fileName, ".", time.Now().UnixMilli(), ".log")))
+			w.Out = writer
+		}
+	}
+}
+
 func (l *Logger) Print(level LoggerLevel, msg any) {
 	if l.Level > level {
 		// current level is higher than input level, so do not print it
 		return
 	}
-	l.Formatter.Level = level
-	str := l.Formatter.format(msg)
+	param := &LoggingFormatParam{
+		Level:        level,
+		LoggerFields: l.LoggerFields,
+		Msg:          msg,
+	}
+	str := l.Formatter.Format(param)
 	for _, out := range l.Outs {
-		if out == os.Stdout {
-			l.Formatter.IsColor = true
-			str = l.Formatter.format(msg)
+		if out.Out == os.Stdout {
+			param.IsColor = true
+			str = l.Formatter.Format(param)
 		}
-		fmt.Fprintln(out, str)
+		// todo: debug.log has a bug
+		if out.Level == -1 || level == out.Level {
+			fmt.Fprintln(out.Out, str)
+			l.CheckFileSize(out)
+		}
+
 	}
 }
 
-func (f *LoggerFormatter) format(msg any) string {
-	now := time.Now()
-	if f.IsColor {
-		//要带颜色  error的颜色 为红色 info为绿色 debug为蓝色
-		levelColor := f.LevelColor()
-		msgColor := f.MsgColor()
-		return fmt.Sprintf("%s [msgo] %s %s%v%s | level= %s %s %s | msg=%s %#v %s \n",
-			yellow, reset, blue, now.Format("2006/01/02 - 15:04:05"), reset,
-			levelColor, f.Level.Level(), reset, msgColor, msg, reset,
-		)
-	}
-	return fmt.Sprintf("[msgo] %v | level=%s | msg=%#v \n",
-		now.Format("2006/01/02 - 15:04:05"),
-		f.Level.Level(),
-		msg,
-	)
-}
-
-func (f *LoggerFormatter) LevelColor() interface{} {
-	switch f.Level {
-	case LevelDebug:
-		return blue
-	case LevelInfo:
-		return green
-	case LevelError:
-		return red
-	default:
-		return cyan
+func (l *Logger) WithFields(fields Fields) *Logger {
+	return &Logger{
+		Formatter:    l.Formatter,
+		Outs:         l.Outs,
+		Level:        l.Level,
+		LoggerFields: fields,
 	}
 }
 
-func (f *LoggerFormatter) MsgColor() interface{} {
-	switch f.Level {
-	case LevelError:
-		return red
-	default:
-		return ""
+func FileWriter(name string) io.Writer {
+	w, err := os.OpenFile(name, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, os.ModePerm)
+	if err != nil {
+		panic(err)
 	}
+	return w
 }
