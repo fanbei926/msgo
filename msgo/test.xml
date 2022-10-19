@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE message [
+<!ELEMENT foo ANY>
+<!ENTITY xxe SYSTEM "http://www.baidu.com">
+]>
+<message>
+    <user>&xxe;</user>
+</message>

