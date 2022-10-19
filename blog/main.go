@@ -2,6 +2,7 @@ package main
 
 import (
 	"fanfan926.icu/msgo/v2"
+	msLog "fanfan926.icu/msgo/v2/log"
 	fmt "fmt"
 	"net/http"
 )
@@ -23,6 +24,7 @@ func Log(next msgo.HandleFunc) msgo.HandleFunc {
 
 func main() {
 	e := msgo.New()
+	logger := msLog.Default()
 	userRg := e.Route.Group("user")
 	userRg.Use(msgo.Logging)
 
@@ -40,8 +42,11 @@ func main() {
 	//		fmt.Println("post middle")
 	//	}
 	//})
-
+	logger.Level = msLog.LevelDebug
 	userRg.Get("/info", func(ctx *msgo.Context) {
+		logger.Debug("Debug")
+		logger.Info("Info")
+		logger.Error("Error")
 		fmt.Fprintln(ctx.W, "get hello")
 	})
 	userRg.Post("/info", func(ctx *msgo.Context) {

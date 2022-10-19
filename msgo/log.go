@@ -93,14 +93,16 @@ func LoggingWithConfig(conf LoggingConfig, next HandleFunc) HandleFunc {
 		formatter = defaultFormatter
 	}
 	out := conf.Out
+	displayColor := false
 	if out == nil {
 		out = DefaultWriter
+		displayColor = true
 	}
 	return func(ctx *Context) {
 		r := ctx.R
 		params := &LogFormatterParams{
 			Request:        r,
-			IsDisplayColor: false,
+			IsDisplayColor: displayColor,
 		}
 		start := time.Now()
 		path := r.URL.Path
