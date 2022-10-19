@@ -1,0 +1,133 @@
+Index: msgo/go.sum
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=\r\ngithub.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=\r\ngithub.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=\r\ngithub.com/go-playground/assert/v2 v2.0.1/go.mod h1:VDjEfimB/XKnb+ZQfWdccd7VUvScMdVu0Titje2rxJ4=\r\ngithub.com/go-playground/locales v0.14.0 h1:u50s323jtVGugKlcYeyzC0etD1HifMjqmJqb8WugfUU=\r\ngithub.com/go-playground/locales v0.14.0/go.mod h1:sawfccIbzZTqEDETgFXqTho0QybSa7l++s0DH+LDiLs=\r\ngithub.com/go-playground/universal-translator v0.18.0 h1:82dyy6p4OuJq4/CByFNOn/jYrnRPArHwAcmLoJZxyho=\r\ngithub.com/go-playground/universal-translator v0.18.0/go.mod h1:UvRDBj+xPUEGrFYl+lu/H90nyDXpg0fqeB/AQUGNTVA=\r\ngithub.com/go-playground/validator/v10 v10.11.1 h1:prmOlTVv+YjZjmRmNSF3VmspqJIxJWXmqUsHwfTRRkQ=\r\ngithub.com/go-playground/validator/v10 v10.11.1/go.mod h1:i+3WkQ1FvaUjjxh1kSvIA4dMGDBiPU55YFDl0WbKdWU=\r\ngithub.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORNo=\r\ngithub.com/kr/pretty v0.2.1/go.mod h1:ipq/a2n7PKx3OHsz4KJII5eveXtPO4qwEXGdVfWzfnI=\r\ngithub.com/kr/pretty v0.3.0/go.mod h1:640gp4NfQd8pI5XOwp5fnNeVWj67G7CFk/SaSQn7NBk=\r\ngithub.com/kr/pty v1.1.1/go.mod h1:pFQYn66WHrOpPYNljwOMqo10TkYh1fy3cYio2l3bCsQ=\r\ngithub.com/kr/text v0.1.0/go.mod h1:4Jbv+DJW3UT/LiOwJeYQe1efqtUx/iVham/4vfdArNI=\r\ngithub.com/kr/text v0.2.0/go.mod h1:eLer722TekiGuMkidMxC/pM04lWEeraHUUmBw8l2grE=\r\ngithub.com/leodido/go-urn v1.2.1 h1:BqpAaACuzVSgi/VLzGZIobT2z4v53pjosyNd9Yv6n/w=\r\ngithub.com/leodido/go-urn v1.2.1/go.mod h1:zt4jvISO2HfUBqxjfIshjdMTYS56ZS/qv49ictyFfxY=\r\ngithub.com/pkg/diff v0.0.0-20210226163009-20ebb0f2a09e/go.mod h1:pJLUxLENpZxwdsKMEsNbx1VGcRFpLqf3715MtcvvzbA=\r\ngithub.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=\r\ngithub.com/rogpeppe/go-internal v1.6.1/go.mod h1:xXDCJY+GAPziupqXw64V24skbSoqbTEfhy4qGm1nDQc=\r\ngithub.com/rogpeppe/go-internal v1.8.0/go.mod h1:WmiCO8CzOY8rg0OYDC4/i/2WRWAB6poM+XZ2dLUbcbE=\r\ngithub.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=\r\ngithub.com/stretchr/testify v1.6.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=\r\ngithub.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=\r\ngolang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3 h1:0es+/5331RGQPcXlMfP+WrnIIS6dNnNRe0WB02W0F4M=\r\ngolang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3/go.mod h1:IxCIyHEi3zRg3s0A5j5BB6A9Jmi73HwBIUl50j+osU4=\r\ngolang.org/x/net v0.0.0-20211112202133-69e39bad7dc2/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=\r\ngolang.org/x/sys v0.0.0-20201119102817-f84b799fce68/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=\r\ngolang.org/x/sys v0.0.0-20210423082822-04245dca01da/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=\r\ngolang.org/x/sys v0.0.0-20210615035016-665e8c7367d1/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=\r\ngolang.org/x/sys v0.0.0-20210806184541-e5e7981a1069 h1:siQdpVirKtzPhKl3lZWozZraCFObP8S1v6PRp0bLrtU=\r\ngolang.org/x/sys v0.0.0-20210806184541-e5e7981a1069/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=\r\ngolang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1/go.mod h1:bj7SfCRtBDWHUb9snDiAeCFNEtKQo2Wmx5Cou7ajbmo=\r\ngolang.org/x/text v0.3.6/go.mod h1:5Zoc/QRtKVWzQhOtBMvqHzDpF6irO9z98xDceosuGiQ=\r\ngolang.org/x/text v0.3.7 h1:olpwvP2KacW1ZWvsR7uQhoyTYvKAupfQrRGBFM352Gk=\r\ngolang.org/x/text v0.3.7/go.mod h1:u+2+/6zg+i71rQMx5EYifcz6MCKuco9NR6JIITiCfzQ=\r\ngolang.org/x/tools v0.0.0-20180917221912-90fa682c2a6e/go.mod h1:n7NCudcB/nEzxVGmLbDWY5pfWTLqBcC2KZ6jyYvM4mQ=\r\ngopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=\r\ngopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=\r\ngopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c/go.mod h1:JHkPIbrfpd72SG/EVd6muEfDQjcINNoR0C8j2r3qZ4Q=\r\ngopkg.in/errgo.v2 v2.1.0/go.mod h1:hNsd1EY+bozCKY1Ytp96fpM3vjJbqLJn88ws8XvfDNI=\r\ngopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=\r\ngopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/msgo/go.sum b/msgo/go.sum
+--- a/msgo/go.sum	(revision 743bfa603a67336c1b37d561a0fc980a6dbc44cb)
++++ b/msgo/go.sum	(date 1666182060323)
+@@ -1,6 +1,8 @@
+ github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
+ github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
++github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
+ github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
++github.com/go-playground/assert/v2 v2.0.1 h1:MsBgLAaY856+nPRTKrp3/OZK38U/wa0CcBYNjji3q3A=
+ github.com/go-playground/assert/v2 v2.0.1/go.mod h1:VDjEfimB/XKnb+ZQfWdccd7VUvScMdVu0Titje2rxJ4=
+ github.com/go-playground/locales v0.14.0 h1:u50s323jtVGugKlcYeyzC0etD1HifMjqmJqb8WugfUU=
+ github.com/go-playground/locales v0.14.0/go.mod h1:sawfccIbzZTqEDETgFXqTho0QybSa7l++s0DH+LDiLs=
+@@ -17,11 +19,13 @@
+ github.com/leodido/go-urn v1.2.1 h1:BqpAaACuzVSgi/VLzGZIobT2z4v53pjosyNd9Yv6n/w=
+ github.com/leodido/go-urn v1.2.1/go.mod h1:zt4jvISO2HfUBqxjfIshjdMTYS56ZS/qv49ictyFfxY=
+ github.com/pkg/diff v0.0.0-20210226163009-20ebb0f2a09e/go.mod h1:pJLUxLENpZxwdsKMEsNbx1VGcRFpLqf3715MtcvvzbA=
++github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
+ github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
+ github.com/rogpeppe/go-internal v1.6.1/go.mod h1:xXDCJY+GAPziupqXw64V24skbSoqbTEfhy4qGm1nDQc=
+ github.com/rogpeppe/go-internal v1.8.0/go.mod h1:WmiCO8CzOY8rg0OYDC4/i/2WRWAB6poM+XZ2dLUbcbE=
+ github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
+ github.com/stretchr/testify v1.6.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
++github.com/stretchr/testify v1.7.0 h1:nwc3DEeHmmLAfoZucVR881uASk0Mfjw8xYJ99tb5CcY=
+ github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
+ golang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3 h1:0es+/5331RGQPcXlMfP+WrnIIS6dNnNRe0WB02W0F4M=
+ golang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3/go.mod h1:IxCIyHEi3zRg3s0A5j5BB6A9Jmi73HwBIUl50j+osU4=
+@@ -41,4 +45,5 @@
+ gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c/go.mod h1:JHkPIbrfpd72SG/EVd6muEfDQjcINNoR0C8j2r3qZ4Q=
+ gopkg.in/errgo.v2 v2.1.0/go.mod h1:hNsd1EY+bozCKY1Ytp96fpM3vjJbqLJn88ws8XvfDNI=
+ gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
++gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b h1:h8qDotaEPuJATrMmW04NCwg7v22aHH28wwpauUhK9Oo=
+ gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"ALL\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"361e98a3-071c-4702-9955-226fac3de394\" name=\"Changes\" comment=\"create treeNode struct&#10;use it to search url\">\r\n      <change afterPath=\"$PROJECT_DIR$/blog/fkdyy.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/blog/template/Book1.xlsx\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/blog/template/header.html\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/blog/template/index.html\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/blog/template/login.html\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/blog/吉祥航空物流运维技术服务清单（8月）.docx\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/blog/吉祥航空物流运维技术服务清单（8月）.pdf\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/msgo/binding/binding.go\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/msgo/binding/json.go\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/msgo/binding/validator.go\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/msgo/binding/xml.go\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/msgo/context.go\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/msgo/go.sum\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/msgo/internal/bytesconv.go\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/msgo/log.go\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/msgo/render/html.go\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/msgo/render/myjson.go\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/msgo/render/myredirect.go\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/msgo/render/mystring.go\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/msgo/render/mytemplate.go\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/msgo/render/myxml.go\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/msgo/render/render.go\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/msgo/test.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/blog/main.go\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/blog/main.go\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/msgo/go.mod\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/msgo/go.mod\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/msgo/ms.go\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/msgo/ms.go\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/msgo/utils.go\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/msgo/utils.go\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"HTML File\" />\r\n        <option value=\"Go File\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"GOROOT\" url=\"file:///usr/local/go\" />\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"HighlightingSettingsPerFile\">\r\n    <setting file=\"file:///usr/local/go/src/net/http/server.go\" root0=\"SKIP_INSPECTION\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2ENkY9VyVrNC5SHvxWfIO8rk7my\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,\r\n    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,\r\n    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;/Users/4work&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;go&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"$PROJECT_DIR$/msgo/binding\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Go Build.go build main.go\">\r\n    <configuration name=\"go build main.go\" type=\"GoApplicationRunConfiguration\" factoryName=\"Go Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"awesomeProject\" />\r\n      <working_directory value=\"$PROJECT_DIR$/blog\" />\r\n      <kind value=\"FILE\" />\r\n      <package value=\"awesomeProject\" />\r\n      <directory value=\"$PROJECT_DIR$\" />\r\n      <filePath value=\"$PROJECT_DIR$/blog/main.go\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"TestTreeNode in fanfan926.icu/msgo/v2\" type=\"GoTestRunConfiguration\" factoryName=\"Go Test\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"awesomeProject\" />\r\n      <working_directory value=\"$PROJECT_DIR$/msgo\" />\r\n      <kind value=\"PACKAGE\" />\r\n      <package value=\"fanfan926.icu/msgo/v2\" />\r\n      <directory value=\"$PROJECT_DIR$\" />\r\n      <filePath value=\"$PROJECT_DIR$\" />\r\n      <framework value=\"gotest\" />\r\n      <pattern value=\"^\\QTestTreeNode\\E$\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Go Build.go build main.go\" />\r\n      <item itemvalue=\"Go Test.TestTreeNode in fanfan926.icu/msgo/v2\" />\r\n    </list>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Go Build.go build main.go\" />\r\n        <item itemvalue=\"Go Test.TestTreeNode in fanfan926.icu/msgo/v2\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"opatimize Engine.ServeHTTP\" />\r\n    <MESSAGE value=\"create treeNode struct&#10;use it to search url\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"create treeNode struct&#10;use it to search url\" />\r\n  </component>\r\n  <component name=\"VgoProject\">\r\n    <settings-migrated>true</settings-migrated>\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <default-breakpoints>\r\n        <breakpoint type=\"DlvErrorBreakpoint\" />\r\n      </default-breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 743bfa603a67336c1b37d561a0fc980a6dbc44cb)
++++ b/.idea/workspace.xml	(date 1666182184333)
+@@ -5,34 +5,9 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="361e98a3-071c-4702-9955-226fac3de394" name="Changes" comment="create treeNode struct&#10;use it to search url">
+-      <change afterPath="$PROJECT_DIR$/blog/fkdyy.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/blog/template/Book1.xlsx" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/blog/template/header.html" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/blog/template/index.html" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/blog/template/login.html" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/blog/吉祥航空物流运维技术服务清单（8月）.docx" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/blog/吉祥航空物流运维技术服务清单（8月）.pdf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/msgo/binding/binding.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/msgo/binding/json.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/msgo/binding/validator.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/msgo/binding/xml.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/msgo/context.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/msgo/go.sum" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/msgo/internal/bytesconv.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/msgo/log.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/msgo/render/html.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/msgo/render/myjson.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/msgo/render/myredirect.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/msgo/render/mystring.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/msgo/render/mytemplate.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/msgo/render/myxml.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/msgo/render/render.go" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/msgo/test.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/blog/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/blog/main.go" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/msgo/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/msgo/go.mod" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/msgo/ms.go" beforeDir="false" afterPath="$PROJECT_DIR$/msgo/ms.go" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/msgo/utils.go" beforeDir="false" afterPath="$PROJECT_DIR$/msgo/utils.go" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/msgo/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/msgo/go.sum" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -47,13 +22,10 @@
+       </list>
+     </option>
+   </component>
+-  <component name="GOROOT" url="file:///usr/local/go" />
++  <component name="GOROOT" url="file://C:/Program Files/Go" />
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+-  <component name="HighlightingSettingsPerFile">
+-    <setting file="file:///usr/local/go/src/net/http/server.go" root0="SKIP_INSPECTION" />
+-  </component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+   </component>
+@@ -79,7 +51,8 @@
+     &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
+     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;/Users/4work&quot;,
++    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/NT&quot;,
+     &quot;settings.editor.selected.configurable&quot;: &quot;go&quot;
+   }
+ }</component>
+Index: msgo/go.mod
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>module fanfan926.icu/msgo/v2\r\n\r\ngo 1.18\r\n\r\nrequire (\r\n\tgithub.com/go-playground/locales v0.14.0 // indirect\r\n\tgithub.com/go-playground/universal-translator v0.18.0 // indirect\r\n\tgithub.com/go-playground/validator/v10 v10.11.1 // indirect\r\n\tgithub.com/leodido/go-urn v1.2.1 // indirect\r\n\tgolang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3 // indirect\r\n\tgolang.org/x/sys v0.0.0-20210806184541-e5e7981a1069 // indirect\r\n\tgolang.org/x/text v0.3.7 // indirect\r\n)\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/msgo/go.mod b/msgo/go.mod
+--- a/msgo/go.mod	(revision 743bfa603a67336c1b37d561a0fc980a6dbc44cb)
++++ b/msgo/go.mod	(date 1666182060324)
+@@ -2,10 +2,11 @@
+ 
+ go 1.18
+ 
++require github.com/go-playground/validator/v10 v10.11.1
++
+ require (
+ 	github.com/go-playground/locales v0.14.0 // indirect
+ 	github.com/go-playground/universal-translator v0.18.0 // indirect
+-	github.com/go-playground/validator/v10 v10.11.1 // indirect
+ 	github.com/leodido/go-urn v1.2.1 // indirect
+ 	golang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3 // indirect
+ 	golang.org/x/sys v0.0.0-20210806184541-e5e7981a1069 // indirect
