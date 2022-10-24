@@ -3,6 +3,7 @@ package msgo
 import (
 	"errors"
 	"fanfan926.icu/msgo/v2/binding"
+	msLog "fanfan926.icu/msgo/v2/log"
 	"fanfan926.icu/msgo/v2/render"
 	"fmt"
 	"html/template"
@@ -25,6 +26,7 @@ type Context struct {
 	formCache             url.Values
 	DisallowUnknownFields bool
 	IsValidate            bool
+	Logger                *msLog.Logger
 }
 
 func (ctx *Context) FormFile(key string) *multipart.FileHeader {
@@ -260,4 +262,8 @@ func (ctx *Context) MustBindWith(object any, b binding.Binding) error {
 
 func (ctx *Context) ShouldBind(object any, b binding.Binding) error {
 	return b.Bind(ctx.R, object)
+}
+
+func (ctx *Context) Fail(code int, msg string) {
+	ctx.String(code, msg)
 }

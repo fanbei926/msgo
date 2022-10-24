@@ -1,6 +1,7 @@
 package msgo
 
 import (
+	msLog "fanfan926.icu/msgo/v2/log"
 	"fanfan926.icu/msgo/v2/render"
 	"fmt"
 	"html/template"
@@ -45,8 +46,8 @@ func (rg *routeGroup) registerHandleFuncMap(path, method string, f HandleFunc, m
 }
 
 // Use register a preMiddlewareFunc
-func (rg *routeGroup) Use(middleFunc MiddlewareHandleFunc) {
-	rg.middlewareFunc = append(rg.middlewareFunc, middleFunc)
+func (rg *routeGroup) Use(middleFunc ...MiddlewareHandleFunc) {
+	rg.middlewareFunc = append(rg.middlewareFunc, middleFunc...)
 }
 
 // it will execute all the middlewares registered
@@ -97,6 +98,7 @@ func (rg *routeGroup) Head(path string, f HandleFunc, mf ...MiddlewareHandleFunc
 
 type route struct {
 	routeGroups []*routeGroup
+	engine      *Engine
 }
 
 // Group register a new route group
@@ -112,6 +114,7 @@ func (r *route) Group(name string) *routeGroup {
 		},
 	}
 
+	rg.Use(r.engine.middles...)
 	r.routeGroups = append(r.routeGroups, rg)
 	return rg
 }
@@ -121,6 +124,8 @@ type Engine struct {
 	funcMap template.FuncMap
 	render  *render.HTMLRender
 	pool    sync.Pool
+	Logger  *msLog.Logger
+	middles []MiddlewareHandleFunc
 }
 
 func New() *Engine {
@@ -130,6 +135,14 @@ func New() *Engine {
 	engine.pool.New = func() any {
 		return engine.allocateContext()
 	}
+	return engine
+}
+
+func Default() *Engine {
+	engine := New()
+	engine.Route.engine = engine
+	engine.Logger = msLog.Default()
+	engine.Use(Logging, Recovery)
 	return engine
 }
 
@@ -186,6 +199,7 @@ func (e *Engine) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	ctx := e.pool.Get().(*Context)
 	ctx.W = w
 	ctx.R = r
+	ctx.Logger = e.Logger
 	e.httpRequestHandle(w, r, ctx)
 	e.pool.Put(ctx)
 
@@ -198,4 +212,8 @@ func (e *Engine) Run() {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+func (e *Engine) Use(middles ...MiddlewareHandleFunc) {
+	e.middles = middles
 }

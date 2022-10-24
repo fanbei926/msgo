@@ -166,6 +166,7 @@ func (l *Logger) Print(level LoggerLevel, msg any) {
 		if out.Out == os.Stdout {
 			param.IsColor = true
 			str = l.Formatter.Format(param)
+			fmt.Fprintln(out.Out, str)
 		}
 		// todo: debug.log has a bug
 		if out.Level == -1 || level == out.Level {

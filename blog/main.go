@@ -23,10 +23,11 @@ func Log(next msgo.HandleFunc) msgo.HandleFunc {
 }
 
 func main() {
-	e := msgo.New()
-	logger := msLog.Default()
+	e := msgo.Default()
+
 	userRg := e.Route.Group("user")
-	userRg.Use(msgo.Logging)
+	//userRg.Use(msgo.Logging)
+	//userRg.Use(msgo.Recovery)
 
 	//userRg.Use(func(next msgo.HandleFunc) msgo.HandleFunc {
 	//	return func(ctx *msgo.Context) {
@@ -42,20 +43,19 @@ func main() {
 	//		fmt.Println("post middle")
 	//	}
 	//})
-	logger.Level = msLog.LevelDebug
-	logger.Formatter = &msLog.JsonFormatter{
-		TimeDisplay: true,
-	}
+	e.Logger.Level = msLog.LevelDebug
 	//logger.Outs = append(logger.Outs, msLog.FileWriter("./log/log.log"))
-	logger.SetLogPath("./log")
-	logger.LogFileSize = 1 << 10 //1k
+	//e.Logger.SetLogPath("./log")
+	e.Logger.LogFileSize = 1 << 10 //1k
+	var u *User
 	userRg.Get("/info", func(ctx *msgo.Context) {
-		logger.WithFields(msLog.Fields{
+		u.Age = 10
+		ctx.Logger.WithFields(msLog.Fields{
 			"name": "fkdyy",
 			"age":  1000,
 		}).Debug("Debug")
-		logger.Info("Info")
-		logger.Error("Error")
+		ctx.Logger.Info("Info")
+		ctx.Logger.Error("Error")
 		fmt.Fprintln(ctx.W, "get hello")
 	})
 	userRg.Post("/info", func(ctx *msgo.Context) {

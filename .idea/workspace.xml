@@ -4,18 +4,16 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="361e98a3-071c-4702-9955-226fac3de394" name="Changes" comment="add gitignore">
-      <change afterPath="$PROJECT_DIR$/blog/log/all.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blog/log/debug.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blog/log/error.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blog/log/info.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/msgo/internal/msstrings/strings.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/msgo/log/json.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/msgo/log/text.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="361e98a3-071c-4702-9955-226fac3de394" name="Changes" comment="log">
+      <change afterPath="$PROJECT_DIR$/msgo/mspool/pool.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/msgo/mspool/worker.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/msgo/recovery.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/blog/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msgo/context.go" beforeDir="false" afterPath="$PROJECT_DIR$/msgo/context.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/msgo/log/log.go" beforeDir="false" afterPath="$PROJECT_DIR$/msgo/log/log.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msgo/log/text.go" beforeDir="false" afterPath="$PROJECT_DIR$/msgo/log/text.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msgo/ms.go" beforeDir="false" afterPath="$PROJECT_DIR$/msgo/ms.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +31,9 @@
   <component name="GOROOT" url="file:///usr/local/go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file:///usr/local/go/src/net/http/server.go" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -121,14 +121,20 @@
     <MESSAGE value="opatimize Engine.ServeHTTP" />
     <MESSAGE value="create treeNode struct&#10;use it to search url" />
     <MESSAGE value="log" />
-    <MESSAGE value="add gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="add gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="log" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/msgo/recovery.go</url>
+          <line>11</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="DlvErrorBreakpoint" />
       </default-breakpoints>
