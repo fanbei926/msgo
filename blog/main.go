@@ -2,9 +2,10 @@ package main
 
 import (
 	"fanfan926.icu/msgo/v2"
-	msLog "fanfan926.icu/msgo/v2/log"
+	"fanfan926.icu/msgo/v2/mspool"
 	fmt "fmt"
 	"net/http"
+	"time"
 )
 
 type User struct {
@@ -43,19 +44,40 @@ func main() {
 	//		fmt.Println("post middle")
 	//	}
 	//})
-	e.Logger.Level = msLog.LevelDebug
+	//e.Logger.Level = msLog.LevelDebug
 	//logger.Outs = append(logger.Outs, msLog.FileWriter("./log/log.log"))
 	//e.Logger.SetLogPath("./log")
-	e.Logger.LogFileSize = 1 << 10 //1k
-	var u *User
+	//e.Logger.LogFileSize = 1 << 10 //1k
+	//var u *User
+	p, err := mspool.NewPool(2)
+	if err != nil {
+		fmt.Println(err)
+	}
 	userRg.Get("/info", func(ctx *msgo.Context) {
-		u.Age = 10
-		ctx.Logger.WithFields(msLog.Fields{
-			"name": "fkdyy",
-			"age":  1000,
-		}).Debug("Debug")
-		ctx.Logger.Info("Info")
-		ctx.Logger.Error("Error")
+		//u.Age = 10
+		//ctx.Logger.WithFields(msLog.Fields{
+		//	"name": "fkdyy",
+		//	"age":  1000,
+		//}).Debug("Debug")
+		//ctx.Logger.Info("Info")
+		//ctx.Logger.Error("Error")
+		p.Submit(func() {
+			time.Sleep(5 * time.Second)
+			fmt.Println("11111111111111")
+		})
+		p.Submit(func() {
+			time.Sleep(6 * time.Second)
+			fmt.Println("22222")
+		})
+		p.Submit(func() {
+			time.Sleep(3 * time.Second)
+			fmt.Println("3333")
+		})
+		p.Submit(func() {
+			time.Sleep(4 * time.Second)
+			fmt.Println("4444")
+		})
+
 		fmt.Fprintln(ctx.W, "get hello")
 	})
 	userRg.Post("/info", func(ctx *msgo.Context) {

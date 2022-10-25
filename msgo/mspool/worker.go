@@ -16,7 +16,9 @@ func (w *Worker) run() {
 
 func (w *Worker) running() {
 	for f := range w.task {
+		// todo: I must test it_ is range chan, it can always wait
 		if f == nil {
+			w.pool.workerCache.Put(w)
 			return
 		}
 		f()
