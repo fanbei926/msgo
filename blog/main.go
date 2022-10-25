@@ -24,6 +24,8 @@ func Log(next msgo.HandleFunc) msgo.HandleFunc {
 }
 
 func main() {
+	x := []int{0, 1, 2, 3}
+	fmt.Println(x[:1])
 	e := msgo.Default()
 
 	userRg := e.Route.Group("user")
@@ -49,7 +51,7 @@ func main() {
 	//e.Logger.SetLogPath("./log")
 	//e.Logger.LogFileSize = 1 << 10 //1k
 	//var u *User
-	p, err := mspool.NewPool(2)
+	p, err := mspool.NewPool(3)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -62,20 +64,23 @@ func main() {
 		//ctx.Logger.Info("Info")
 		//ctx.Logger.Error("Error")
 		p.Submit(func() {
-			time.Sleep(5 * time.Second)
 			fmt.Println("11111111111111")
+			//panic("xxx")
+			time.Sleep(8 * time.Second)
 		})
+
 		p.Submit(func() {
-			time.Sleep(6 * time.Second)
 			fmt.Println("22222")
+			time.Sleep(5 * time.Second)
 		})
+		fmt.Println("------")
 		p.Submit(func() {
-			time.Sleep(3 * time.Second)
 			fmt.Println("3333")
+			time.Sleep(5 * time.Second)
 		})
 		p.Submit(func() {
-			time.Sleep(4 * time.Second)
 			fmt.Println("4444")
+			time.Sleep(4 * time.Second)
 		})
 
 		fmt.Fprintln(ctx.W, "get hello")

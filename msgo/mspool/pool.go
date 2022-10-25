@@ -29,9 +29,10 @@ type Pool struct {
 	// lock
 	lock sync.Mutex
 	// sync.once for release
-	once        sync.Once
-	workerCache sync.Pool
-	con         *sync.Cond
+	once         sync.Once
+	workerCache  sync.Pool
+	con          *sync.Cond
+	PanicHandler func()
 }
 
 func NewPool(cap int) (*Pool, error) {
@@ -64,18 +65,18 @@ func (pool *Pool) Submit(task func()) error {
 	}
 	worker := pool.GetWorker()
 	worker.task <- task
-	pool.incRunning()
+
 	go pool.expireWorkers()
 	return nil
 }
 
 func (pool *Pool) GetWorker() *Worker {
 	// below is the 3 states
+	pool.lock.Lock()
 	idleWorkers := pool.workers
 	n := len(idleWorkers) - 1
 	// 1. if pool has idle workers, return a worker
 	if n >= 0 {
-		pool.lock.Lock()
 		worker := idleWorkers[n]
 		idleWorkers[n] = nil
 		pool.workers = idleWorkers[:n]
@@ -85,6 +86,7 @@ func (pool *Pool) GetWorker() *Worker {
 	// 2. if the number of running workers are less than cap, then create a new worker and return
 	// todo: shall we append the new worker into the slice? -- implement in PutWorker()
 	if pool.running < pool.cap {
+		pool.lock.Unlock()
 		pool.workerCache.New = func() any {
 			return &Worker{
 				pool: pool,
@@ -106,24 +108,51 @@ func (pool *Pool) GetWorker() *Worker {
 		worker.run()
 		return worker
 	}
-	// 3. if not, loop and wait for a new worker
-	for {
-		pool.lock.Lock()
-		pool.con.Wait()
-		idleWorkers := pool.workers
-		n := len(idleWorkers) - 1
-		if n < 0 {
-			pool.lock.Unlock()
-			time.Sleep(1 * time.Second)
-			continue
-		}
+	pool.lock.Unlock()
 
-		worker := idleWorkers[n]
-		idleWorkers[n] = nil
-		pool.workers = idleWorkers[:n]
+	// 3. if not, loop and wait for a new worker
+	return pool.waitIdleWorker()
+}
+
+func (pool *Pool) waitIdleWorker() *Worker {
+	pool.lock.Lock()
+	pool.con.Wait()
+	fmt.Println("得到通知，有空闲worker")
+	idleWorkers := pool.workers
+	n := len(idleWorkers) - 1
+	if n < 0 {
 		pool.lock.Unlock()
-		return worker
+		if pool.running < pool.cap {
+			pool.workerCache.New = func() any {
+				return &Worker{
+					pool: pool,
+					task: make(chan func(), 1),
+				}
+			}
+
+			cache := pool.workerCache.Get()
+			var worker *Worker
+			if cache == nil {
+				worker = &Worker{
+					pool: pool,
+					task: make(chan func(), 1),
+				}
+			} else {
+				worker = cache.(*Worker)
+			}
+
+			worker.run()
+			return worker
+		}
+		pool.waitIdleWorker()
 	}
+
+	// get the latest worker
+	worker := idleWorkers[n]
+	idleWorkers[n] = nil
+	pool.workers = idleWorkers[:n]
+	pool.lock.Unlock()
+	return worker
 }
 
 func (pool *Pool) incRunning() {
@@ -138,7 +167,7 @@ func (pool *Pool) PutWorker(w *Worker) {
 	w.lastTime = time.Now()
 	pool.lock.Lock()
 	pool.workers = append(pool.workers, w)
-
+	pool.con.Signal() // notify
 	pool.lock.Unlock()
 }
 
@@ -180,21 +209,26 @@ func (pool *Pool) expireWorkers() {
 		n := len(pool.workers) - 1
 		idleWorkers := pool.workers
 		if n >= 0 {
+			var clearN = -1
 			for i, w := range idleWorkers {
 				if time.Now().Sub(w.lastTime) < pool.expire {
 					break
 				}
 				// below it means that the w is an expired worker
-				w.task = nil
-				w.pool = nil
-				n = i // all elements before I are expired, so we need to delete them
+				w.task <- nil
+				clearN = i // all elements before I are expired, so we need to delete them
 			}
-			if n >= len(pool.workers)-1 {
-				pool.workers = idleWorkers[:0]
-			} else {
-				pool.workers = idleWorkers[n+1:]
+			if clearN != -1 {
+				var tmp []*Worker
+				if clearN >= len(pool.workers)-1 {
+					tmp = idleWorkers
+					pool.workers = idleWorkers[:0]
+				} else {
+					tmp = idleWorkers[:n]
+					pool.workers = idleWorkers[clearN+1:]
+				}
+				fmt.Printf("%s , clean workers %v\n", time.Now().String(), tmp)
 			}
-			fmt.Printf("%s , clean workers %v\n", time.Now().String(), pool.workers)
 		}
 		pool.lock.Unlock()
 	}
