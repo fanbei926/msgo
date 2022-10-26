@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-var DefaultTime int64 = 3
+var DefaultTime int64 = 5
 var ErrInvaildCap = errors.New("cap can not less than 0")
 var ErrInvaildExpire = errors.New("expire can not less than 0")
 var ErrorHasClosed = errors.New("pool has bean released")
@@ -55,7 +55,7 @@ func NewTimePool(cap int, expire int64) (*Pool, error) {
 	}
 
 	pool.con = sync.NewCond(&pool.lock)
-
+	go pool.expireWorkers()
 	return pool, nil
 }
 
@@ -66,7 +66,6 @@ func (pool *Pool) Submit(task func()) error {
 	worker := pool.GetWorker()
 	worker.task <- task
 
-	go pool.expireWorkers()
 	return nil
 }
 
@@ -219,17 +218,28 @@ func (pool *Pool) expireWorkers() {
 				clearN = i // all elements before I are expired, so we need to delete them
 			}
 			if clearN != -1 {
+				fmt.Println(clearN)
 				var tmp []*Worker
 				if clearN >= len(pool.workers)-1 {
 					tmp = idleWorkers
 					pool.workers = idleWorkers[:0]
+					fmt.Printf("%s , 1 clean workers %v\n", time.Now().String(), tmp)
 				} else {
-					tmp = idleWorkers[:n]
+					tmp = idleWorkers[:clearN+1]
 					pool.workers = idleWorkers[clearN+1:]
+					fmt.Printf("%s , 2 clean workers %v\n", time.Now().String(), tmp)
 				}
-				fmt.Printf("%s , clean workers %v\n", time.Now().String(), tmp)
+
 			}
 		}
 		pool.lock.Unlock()
 	}
+}
+
+func (p *Pool) Running() int {
+	return int(atomic.LoadInt32(&p.running))
+}
+
+func (p *Pool) Free() int {
+	return int(p.cap - p.running)
 }

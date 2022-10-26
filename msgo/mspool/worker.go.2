@@ -1,44 +1,40 @@
 package mspool
 
 import (
-	"fmt"
 	"time"
 )
 
 type Worker struct {
 	pool *Pool
-	// tasks
+	//task 任务队列
 	task chan func()
-	// last time ?
+	//lastTime 执行任务的最后的时间
 	lastTime time.Time
 }
 
 func (w *Worker) run() {
-	go w.running()
 	w.pool.incRunning()
+	go w.running()
 }
 
 func (w *Worker) running() {
 	defer func() {
-		fmt.Println("Running")
 		w.pool.decRunning()
 		w.pool.workerCache.Put(w)
 		if err := recover(); err != nil {
+			//捕获任务发生的panic
 			if w.pool.PanicHandler != nil {
 				w.pool.PanicHandler()
-			} else {
-				fmt.Println("no handler")
 			}
 		}
-		w.pool.con.Signal()
+		w.pool.cond.Signal()
 	}()
 	for f := range w.task {
-		// todo: I must test it_ is range chan, it can always wait
 		if f == nil {
-			//w.pool.workerCache.Put(w)
 			return
 		}
 		f()
+		//任务运行完成，worker空闲
 		w.pool.PutWorker(w)
 	}
 }
