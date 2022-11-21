@@ -4,9 +4,37 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="361e98a3-071c-4702-9955-226fac3de394" name="Changes" comment="add recover &amp; bug fix">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="361e98a3-071c-4702-9955-226fac3de394" name="Changes" comment="fix: every submit will create a expireWorkers() func">
+      <change afterPath="$PROJECT_DIR$/blog/conf/app.toml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/go.sum" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/key/ca.crt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/key/ca.csr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/key/ca.key" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/key/client.csr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/key/client.key" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/key/client.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/key/openssl.cnf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/key/server.csr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/key/server.key" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blog/key/server.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/msgo/auth.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/msgo/token/token.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-19_20_28_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-19_20_28__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-19_20_31_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-19_20_31_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-19_20_31_[Changes]2/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-19_20_31__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-19_20_31__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022-10-19_20_31__Changes_2.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/blog/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/blog/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msgo/context.go" beforeDir="false" afterPath="$PROJECT_DIR$/msgo/context.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msgo/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/msgo/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msgo/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/msgo/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msgo/ms.go" beforeDir="false" afterPath="$PROJECT_DIR$/msgo/ms.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msgo/mspool/worker.go" beforeDir="false" afterPath="$PROJECT_DIR$/msgo/mspool/worker.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,10 +49,12 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file://C:/Program Files/Go" />
+  <component name="GOROOT" url="file:///usr/local/go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file:///usr/local/go/src/net/http/server.go" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -37,25 +67,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DefaultGoTemplateProperty": "Go File",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "go.import.settings.migrated": "true",
-    "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "C:/Users/NT",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/4work&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/msgo/binding" />
@@ -71,6 +100,30 @@
       <filePath value="$PROJECT_DIR$/blog/main.go" />
       <method v="2" />
     </configuration>
+    <configuration name="TestHasPool in fanfan926.icu/msgo/v2/mspool" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="awesomeProject" />
+      <working_directory value="$PROJECT_DIR$/msgo/mspool" />
+      <root_directory value="$PROJECT_DIR$/msgo" />
+      <kind value="PACKAGE" />
+      <package value="fanfan926.icu/msgo/v2/mspool" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestHasPool\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestNoPool in fanfan926.icu/msgo/v2/mspool" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="awesomeProject" />
+      <working_directory value="$PROJECT_DIR$/msgo/mspool" />
+      <root_directory value="$PROJECT_DIR$/msgo" />
+      <kind value="PACKAGE" />
+      <package value="fanfan926.icu/msgo/v2/mspool" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestNoPool\E$" />
+      <method v="2" />
+    </configuration>
     <configuration name="TestTreeNode in fanfan926.icu/msgo/v2" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="awesomeProject" />
       <working_directory value="$PROJECT_DIR$/msgo" />
@@ -82,13 +135,29 @@
       <pattern value="^\QTestTreeNode\E$" />
       <method v="2" />
     </configuration>
+    <configuration name="pool_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="awesomeProject" />
+      <working_directory value="$PROJECT_DIR$/msgo/mspool" />
+      <root_directory value="$PROJECT_DIR$/msgo" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/msgo/mspool/pool_test.go" />
+      <framework value="gotest" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Go Build.go build main.go" />
+      <item itemvalue="Go Test.TestHasPool in fanfan926.icu/msgo/v2/mspool" />
+      <item itemvalue="Go Test.TestNoPool in fanfan926.icu/msgo/v2/mspool" />
+      <item itemvalue="Go Test.pool_test.go" />
       <item itemvalue="Go Test.TestTreeNode in fanfan926.icu/msgo/v2" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Go Build.go build main.go" />
+        <item itemvalue="Go Test.pool_test.go" />
+        <item itemvalue="Go Test.TestHasPool in fanfan926.icu/msgo/v2/mspool" />
+        <item itemvalue="Go Test.TestNoPool in fanfan926.icu/msgo/v2/mspool" />
         <item itemvalue="Go Test.TestTreeNode in fanfan926.icu/msgo/v2" />
       </list>
     </recent_temporary>
@@ -113,18 +182,27 @@
     <MESSAGE value="opatimize Engine.ServeHTTP" />
     <MESSAGE value="create treeNode struct&#10;use it to search url" />
     <MESSAGE value="log" />
-    <MESSAGE value="add gitignore" />
-    <MESSAGE value="add recover &amp; bug fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="add recover &amp; bug fix" />
+    <MESSAGE value="fix: every submit will create a expireWorkers() func" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: every submit will create a expireWorkers() func" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/msgo/recovery.go</url>
+          <line>11</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="DlvErrorBreakpoint" />
       </default-breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/awesomeProject$pool_test_go.out" NAME="pool_test.go Coverage Results" MODIFIED="1666711683959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

@@ -3,7 +3,9 @@ package main
 import (
 	"fanfan926.icu/msgo/v2"
 	"fanfan926.icu/msgo/v2/mspool"
+	"fanfan926.icu/msgo/v2/token"
 	fmt "fmt"
+	"log"
 	"net/http"
 	"time"
 )
@@ -27,7 +29,15 @@ func main() {
 	x := []int{0, 1, 2, 3}
 	fmt.Println(x[:1])
 	e := msgo.Default()
-
+	//fmt.Println(msgo.BasicAuth("fane", "123456"))
+	//auth := &msgo.Accounts{
+	//	Users: make(map[string]string),
+	//}
+	//
+	//auth.Users["fane"] = "123456"
+	jh := &token.JWTHandler{Key: []byte("123456")}
+	e.Use(jh.AuthInterceptor)
+	//e.Use(auth.BasicAuth)
 	userRg := e.Route.Group("user")
 	//userRg.Use(msgo.Logging)
 	//userRg.Use(msgo.Recovery)
@@ -113,8 +123,42 @@ func main() {
 		}
 	})
 
-	userRg.Post("/login", func(ctx *msgo.Context) {
-		fmt.Fprintln(ctx.W, "post login")
+	userRg.Get("/login", func(ctx *msgo.Context) {
+		jwt := &token.JWTHandler{}
+		jwt.Key = []byte("123456")
+		jwt.SendCookie = true
+		jwt.TimeOut = 10 * time.Minute
+		jwt.RefreshTimeOut = 20 * time.Minute
+		jwt.Authenticator = func(ctx *msgo.Context) (map[string]any, error) {
+			data := make(map[string]any)
+			data["userId"] = 1
+			return data, nil
+		}
+		token, err := jwt.LoginHandler(ctx)
+		if err != nil {
+			log.Println(err)
+			ctx.JSON(http.StatusOK, err.Error())
+		}
+		ctx.JSON(http.StatusOK, token)
+
+	}, Log)
+
+	userRg.Get("/refresh", func(ctx *msgo.Context) {
+		jwt := &token.JWTHandler{}
+		jwt.Key = []byte("123456")
+		jwt.SendCookie = true
+		jwt.TimeOut = 10 * time.Minute
+		jwt.RefreshTimeOut = 20 * time.Minute
+
+		jwt.RefreshKey = "blog_refresh_token"
+		ctx.Set(jwt.RefreshKey, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjkwMTgwOTAsImlhdCI6MTY2OTAxNjg5MCwidXNlcklkIjoxfQ.fH3Vrv3o2t9j3KMg65mkDXJqLwDBe1MIpQBeYxNxFZ4")
+		token, err := jwt.RefreshHandler(ctx)
+		if err != nil {
+			log.Println(err)
+			ctx.JSON(http.StatusOK, err.Error())
+		}
+		ctx.JSON(http.StatusOK, token)
+
 	}, Log)
 
 	userRg.Post("/first/:id", func(ctx *msgo.Context) {
@@ -245,6 +289,6 @@ func main() {
 		ctx.JSON(200, "ok")
 	})
 
-	e.Run()
-
+	//e.Run()
+	e.RunTLS(":8118", "key/server.pem", "key/server.key")
 }

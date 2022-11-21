@@ -14,8 +14,8 @@ type Worker struct {
 }
 
 func (w *Worker) run() {
-	go w.running()
 	w.pool.incRunning()
+	go w.running()
 }
 
 func (w *Worker) running() {
@@ -35,7 +35,6 @@ func (w *Worker) running() {
 	for f := range w.task {
 		// todo: I must test it_ is range chan, it can always wait
 		if f == nil {
-			//w.pool.workerCache.Put(w)
 			return
 		}
 		f()

@@ -13,6 +13,7 @@ import (
 	"net/url"
 	"os"
 	"strings"
+	"sync"
 )
 
 const defaultMaxMemory = 32 << 20 // 32 mb
@@ -27,6 +28,34 @@ type Context struct {
 	DisallowUnknownFields bool
 	IsValidate            bool
 	Logger                *msLog.Logger
+	Keys                  map[string]any
+	mu                    sync.RWMutex
+	sameSite              http.SameSite
+}
+
+func (ctx *Context) SetSameSite(s http.SameSite) {
+	ctx.sameSite = s
+}
+
+func (ctx *Context) Set(key string, value interface{}) {
+	ctx.mu.Lock()
+	defer ctx.mu.Unlock()
+
+	if ctx.Keys == nil {
+		ctx.Keys = make(map[string]any)
+	}
+	ctx.Keys[key] = value
+}
+
+func (ctx *Context) Get(key string) (value any, ok bool) {
+	ctx.mu.RLock()
+	defer ctx.mu.RUnlock()
+	value, ok = ctx.Keys[key]
+	return value, ok
+}
+
+func (ctx *Context) SetBasicAuth(username, password string) {
+	ctx.R.Header.Set("Authorization", "Basic "+BasicAuth(username, password))
 }
 
 func (ctx *Context) FormFile(key string) *multipart.FileHeader {
@@ -266,4 +295,20 @@ func (ctx *Context) ShouldBind(object any, b binding.Binding) error {
 
 func (ctx *Context) Fail(code int, msg string) {
 	ctx.String(code, msg)
+}
+
+func (ctx *Context) SetCookie(name, value string, maxAge int, path, domain string, secure, httpOnly bool) {
+	if path == "" {
+		path = "/"
+	}
+	http.SetCookie(ctx.W, &http.Cookie{
+		Name:     name,
+		Value:    url.QueryEscape(value),
+		MaxAge:   maxAge,
+		Path:     path,
+		Domain:   domain,
+		SameSite: ctx.sameSite,
+		Secure:   secure,
+		HttpOnly: httpOnly,
+	})
 }
