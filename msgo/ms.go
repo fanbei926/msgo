@@ -142,6 +142,10 @@ func Default() *Engine {
 	engine := New()
 	engine.Route.engine = engine
 	engine.Logger = msLog.Default()
+	logPath, ok := config.Conf.Log["path"]
+	if ok {
+		engine.Logger.SetLogPath(logPath.(string))
+	}
 	engine.Use(Logging, Recovery)
 	return engine
 }

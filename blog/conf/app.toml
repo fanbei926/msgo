@@ -1,2 +1,11 @@
 [log]
 path = "./log"
+[pool]
+cap=10
+[mysql]
+username = "root"
+password = "123456"
+url = ""
+[redis]
+host = "127.0.0.1"
+port = 6379

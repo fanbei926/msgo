@@ -39,6 +39,14 @@ func NewPool(cap int) (*Pool, error) {
 	return NewTimePool(cap, DefaultTime)
 }
 
+func NewPoolConf() (*Pool, error) {
+	cap, ok := config.Conf.Pool["cap"]
+	if !ok {
+		return nil, errors.New("cap config not set")
+	}
+	return NewTimePool(int(cap.(int64)), DefaultTime)
+}
+
 func NewTimePool(cap int, expire int64) (*Pool, error) {
 	if cap <= 0 {
 		return nil, ErrInvaildCap
